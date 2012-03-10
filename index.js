@@ -52,13 +52,13 @@ var asynclist = require('asynclist'),
             });
             return this;
         },
-        emit: function (event) {
+        emit: function (event, arg1, arg2, arg3, arg4, arg5) {
             var self = this;
             async(function () {
                 var then = self.thenHandler[event] ? self.thenHandler[event] : function () {},
                     handlers = self._eventListeners[event] !== undefined ? self._eventListeners[event] : [];
                 var tasks = new asynclist(handlers);
-                tasks.assign(then).run();
+                tasks.assign(then).run(arg1, arg2, arg3, arg4, arg5);
             });
             return this;
         },
@@ -67,7 +67,11 @@ var asynclist = require('asynclist'),
             return this;
         },
         listeners: function (event) {
-            return this._eventListeners[event];
+            if (this._eventListeners[event] !== undefined) {
+                return this._eventListeners[event];
+            } else {
+                return [];
+            }
         }
     },
     emitter_class = function () {};
@@ -120,12 +124,12 @@ emitter_class.prototype.removeAllListener = function (event) {
     });
     return this;
 };
-emitter_class.prototype.emit = function (event) {
+emitter_class.prototype.emit = function (event, arg1, arg2, arg3, arg4, arg5) {
     var self = this;
     async(function () {
         var tasks = new asynclist(self._eventListeners[event]),
             handler = self.thenHandler ? self.thenHandler : function () {};
-        tasks.assgin(handler).run();
+        tasks.assgin(handler).run(arg1, arg2, arg3, arg4, arg5);
         handler = function () {};
     });
     return this;
