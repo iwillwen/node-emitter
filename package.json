@@ -11,6 +11,7 @@
   "engines": {
     "node": ">= 0.4.0"
   },
+  "license": "MIT",
   "dependencies": {
     "asynclist": "latest"
   },
