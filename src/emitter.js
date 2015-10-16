@@ -2,7 +2,7 @@ var noop = () => false
 
 var defaultMaxListeners = 10
 
-export class EventEmitter {
+class EventEmitter {
   constructor() {
     this._events = this._events || {}
     this._maxListeners = this._maxListeners || defaultMaxListeners
@@ -338,7 +338,7 @@ class _Promise {
 
 var nativePromise = ('undefined' !== typeof global ? global : window).Promise || null
 
-export function Promise(resolver) {
+function Promise(resolver) {
   var promise = null
   var resolve = noop
   var reject = noop
@@ -363,3 +363,16 @@ export function Promise(resolver) {
 
   return promise
 }
+
+
+function Emitter(obj) {
+  if ('undefined' == typeof obj) {
+    return new EventEmitter()
+  }
+
+  EventEmitter.extend(obj)
+}
+Emitter.EventEmitter = EventEmitter
+Emitter.Promise = Promise
+
+export default Emitter

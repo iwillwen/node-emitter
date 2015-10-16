@@ -2,10 +2,10 @@
   "author": "Will Wen Gunn <willwengunn@gmail.com> (lifemap.in)",
   "name": "emitter",
   "description": "Faster events controller for class and object",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "repository": {
     "type": "git",
-    "url": "git@github.com:iwillwen/node_emitter.git"
+    "url": "git@github.com:iwillwen/node-emitter.git"
   },
   "main": "dist/emitter.js",
   "license": "MIT",
